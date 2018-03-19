@@ -13,5 +13,5 @@ COPY etc/supervisord.d/postfix.ini /etc/supervisord.d/
 RUN newaliases
 
 EXPOSE 25
-#ENTRYPOINT ["/run.sh"]
+
 CMD ["/run.sh"]
