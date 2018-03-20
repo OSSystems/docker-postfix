@@ -15,6 +15,7 @@ echo "myhostname=$SERVER_HOSTNAME"  >> /etc/postfix/main.cf
 echo "mydomain=$DOMAIN"  >> /etc/postfix/main.cf
 echo 'mydestination=$myhostname'  >> /etc/postfix/main.cf
 echo 'myorigin=$mydomain'  >> /etc/postfix/main.cf
+[ -n "${QUEUE_DIRECTORY}" ] && echo "queue_directory = $QUEUE_DIRECTORY" >> /etc/postfix/main.cf
 echo "relayhost = [$SMTP_SERVER]:587" >> /etc/postfix/main.cf
 echo "smtp_use_tls=yes" >> /etc/postfix/main.cf
 echo "smtp_sasl_auth_enable = yes" >> /etc/postfix/main.cf
@@ -24,4 +25,4 @@ echo "smtp_sasl_security_options = noanonymous" >> /etc/postfix/main.cf
 echo "[$SMTP_SERVER]:587 $SMTP_USERNAME:$SMTP_PASSWORD" >> /etc/postfix/sasl_passwd
 postmap /etc/postfix/sasl_passwd
 
-supervisord
+supervisord -c /etc/supervisord.conf
